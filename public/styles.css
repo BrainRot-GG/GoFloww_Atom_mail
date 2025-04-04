@@ -26,11 +26,10 @@ body {
     filter: grayscale(70%);
 }
 
-
 .container {
     position: relative;
     width: 500px;
-    height: 510px;
+    height: 600px;
     max-width: 90%;
     background-color: #000;
     border-radius: 8px;

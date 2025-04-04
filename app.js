@@ -39,7 +39,7 @@ app.post("/create",async(req,res)=>{
     })
 })
 app.get("/login",async(req,res)=>{
-    res.render("index")
+    res.render("login")
 })
 app.post("/login",async(req,res)=>{
     let check_user=await userModel.findOne({email:req.body.email})
@@ -65,11 +65,12 @@ app.get("/profile",async(req,res)=>{
 })
 app.post("/generate-email",async(req,res)=>{
     const {prompt}=req.body
-    const result=await model.generateContent(prompt);
+    const entry=`generate emotional ${prompt}`;
+    const result=await model.generateContent(entry);
     res.send(result.response.candidates[0].content.parts[0].text)
   })
 app.get("/logout",async(req,res)=>{
     res.cookie("token","")
     res.redirect("/login")
 })
-app.listen(3000);
+app.listen(5000);
