@@ -1,0 +1,25 @@
+{
+  "name": "auto-mail",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.2",
+    "node": "^23.11.0",
+    "nodemon": "^3.1.9"
+  }
+}
