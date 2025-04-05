@@ -76,6 +76,9 @@ app.post("/login",async(req,res)=>{
 app.get("/profile",async(req,res)=>{
     res.render("profile")
 })
+app.get("/dashboard",async(req,res)=>{
+    res.render("dashboard")
+})
 app.post("/generate-email",async(req,res)=>{
     const {prompt}=req.body
     const entry=`generate emotional ${prompt}`;
