@@ -9,12 +9,13 @@
     <p>No emails yet.</p>
   <% } else { %>
     <% emails.forEach(email => { %>
-      <div style="border: 1px solid #ccc; padding: 10px; margin: 10px;">
-        <p><strong>From:</strong> <%= email.from %></p>
-        <p><strong>Subject:</strong> <%= email.subject %></p>
-        <p><strong>Message:</strong> <%= email.body %></p>
-        <p><small>Sent At: <%= email.sentAt.toLocaleString() %></small></p>
-      </div>
+        <div class="email-card">
+            <h3>From: <%= email.from.email %></h3>
+            <h4>To: <%= email.to.email %></h4>
+            <p><strong>Subject:</strong> <%= email.subject %></p>
+            <p><%= email.body %></p>
+            <hr/>
+        </div>
     <% }) %>
   <% } %>
   <br>
