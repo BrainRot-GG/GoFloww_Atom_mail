@@ -6,5 +6,4 @@ const userSchema=new mongoose.Schema({
     phone:String,
     password:String
 })
-let users=mongoose.model("user",userSchema)
-module.exports=users;
+module.exports = mongoose.model("User", userSchema);

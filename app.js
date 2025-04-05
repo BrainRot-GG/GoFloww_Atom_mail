@@ -89,14 +89,14 @@ app.get("/logout",async(req,res)=>{
 const LOCAL_USER = "localuser@example.com";
 
 app.get("/compose", requireAuth, (req, res) => {
-    res.render("compose", { from: req.userEmail });
+    res.render("compose", { from: LOCAL_USER });
 });
 
 // Send Email (POST)
 app.post("/compose", requireAuth, async (req, res) => {
     const { to, subject, body } = req.body;
     await Email.create({
-        from: req.userEmail,
+        from: LOCAL_USER,
         to,
         subject,
         body,
@@ -104,24 +104,47 @@ app.post("/compose", requireAuth, async (req, res) => {
     });
     res.redirect("/inbox");
 });
-app.post("/send", async (req, res) => {
+app.post('/send', requireAuth, async (req, res) => {
     const { to, subject, body } = req.body;
-  
-    const email = new Email({
-      from: LOCAL_USER,
-      to,
-      subject,
-      body,
-      isDraft: false,
-      sentAt: new Date(),
-    });
-  
-    await email.save();
-    res.redirect("/inbox");
-  });
-app.get("/inbox", requireAuth, async (req, res) => {
-    const emails = await Email.find({ to: req.userEmail });
-    res.render("inbox", { emails });
+
+    try {
+        const fromUser = await userModel.findOne({ email: req.userEmail });
+        const toUser = await userModel.findOne({ email: to });
+
+        if (!fromUser || !toUser) {
+            return res.status(400).send("One or both users not found.");
+        }
+
+        const email = new Email({
+            from: fromUser._id,
+            to: [toUser._id],
+            subject,
+            body,
+            isDraft: false,
+            sentAt: new Date()
+        });
+
+        await email.save();
+        res.redirect("/inbox");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal server error");
+    }
 });
+
+  
+  app.get("/inbox", requireAuth, async (req, res) => {
+    try {
+        const user = await userModel.findOne({ email: req.userEmail });
+        if (!user) return res.status(404).send("User not found");
+
+        const emails = await Email.find({ to: user._id }).populate("from", "email").populate("to", "email");
+        res.render("inbox", { emails });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server error");
+    }
+});
+
 
 app.listen(3000);

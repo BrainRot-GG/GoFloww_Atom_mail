@@ -1,0 +1,381 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffe9ff;
+}
+
+.navbar {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color: #9434d9;
+    padding: 10px 20px;
+    color: rgb(255, 253, 253);
+    height: 57px;
+}
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.hamburger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.email {
+    font-size: 16px;
+}
+
+.separator {
+    width: 32.2rem;
+    background-color: gray;
+    margin: 0 1rem;
+}
+
+.nav-middle,
+.nav-right {
+    border: black;
+    display: flex;
+    gap: 15px;
+    margin-left: 0.2rem;
+    margin-right: 0.5rem;
+}
+
+.nav-middle i,
+.nav-right i {
+    border: black;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.nav-right i:hover {
+    opacity: 1;
+}
+
+.nav-middle i:hover {
+    opacity: 1;
+}
+
+.chatbot {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    height: 2.75rem;         
+    width: 2.75rem;            
+    background-color: #f0f0f0; 
+    position: fixed;
+    bottom: 1.75rem;
+    right: 2.7rem;
+    cursor: pointer;
+    border-radius: 50%;
+    border:1.5px solid #6a0dad;
+  }
+  
+  .chatbot i {
+    font-size: 1.5rem;
+    text-align: center;
+    padding-top: 0.6rem;
+  }
+  
+  .sidebar {
+    top: 0px;
+    left: -250px; 
+    width: 250px;
+    height: 100vh;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    background-color: #8a6d9c;
+    color: white;
+    padding-top: 65px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .sidebar a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: white;
+    border-bottom: 1px solid #9a81aa9b;
+  }
+  
+  .sidebar a:hover {
+    transform: scale(1.02);
+    transition-delay: 0.2s;
+    font-weight: bold;
+    width: 235px;
+    background-color: #575757;
+    border-radius: 0px 20px 20px 0;
+  }
+  
+  .sidebar.show {
+    left: 0px;
+  }
+
+  .sidebar .compose{
+    text-align: center;
+    margin-left: 30px;
+    
+  }
+
+  .sidebar a i{
+    text-align: center;
+    margin-right: 10px;
+  }
+
+  .compose{
+    background-color: #392d40;
+    width: 180px;
+    height: 60px;
+    border-radius: 35px;
+    text-align: center;
+    opacity: 0.9;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+
+  .compose:hover{
+    transform: scale(1.02);
+    transition-delay: 0.2s;
+    background-color: #1c161f;
+    width: 180px;
+    height: 60px;
+    border-radius: 45px;
+    opacity: 1;
+
+
+  }
+
+  .click-box i {
+    cursor: pointer;
+    border-radius: 8px;
+    margin: 20px;
+  }
+  
+  .button-container {
+    position: fixed;
+    bottom: 100px;
+    right: -250px; 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: right 0.5s ease;
+    z-index: 999;
+    opacity: 0.8;
+  }
+  
+  .button-container button {
+    padding: 10px 20px;
+    background-color: #5c095e;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .button-container .btn {
+    transform: translateX(200%);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+
+  .button-container.show .btn {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  .button-container.show .btn:nth-child(1) {
+    transition-delay: 0.6s;
+  }
+  .button-container.show .btn:nth-child(2) {
+    transition-delay: 0.4s;
+  }
+  .button-container.show .btn:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+
+  .button-container.show {
+    right: 20px; 
+    bottom: 92px;
+  }
+
+  #btn-1:hover {
+    opacity: 1;
+  }
+
+  .mic {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    height: 2.75rem;         
+    width: 2.75rem;            
+    background-color: #f0f0f0; 
+    position: fixed;
+    bottom: 1.75rem;
+    right: 6.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1.5px solid #6a0dad;
+  }
+  
+  .mic i {
+    font-size: 1.5rem;
+    text-align: center;
+    padding-top: 0.2rem;
+  }
+   
+  .account-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .account-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #e26cff;
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .popup-menu {
+    display: none;
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    z-index: 2000;
+  }
+
+  .popup-menu a {
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .popup-menu a:hover {
+    background-color: #f0f0f0;
+  }
+
+/* composebox */
+.email-box {
+    position:fixed;
+    width: 631px;
+    height: 500px;
+    right : 0px;
+    top: 60px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    
+}
+
+.header {
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.input-field {
+    width: 100%;
+    border: none;
+    padding: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.to-field, .subject-field {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0;
+}
+
+.message-box {
+    width: 100%;
+    height: 150px;
+    border: none;
+    resize: none;
+    font-size: 14px;
+    padding: 10px;
+    outline: none;
+}
+
+.footer {
+    position: relative;
+    top: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.send-button {
+    background-color: #8d00a3;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.icons {
+    display: flex;
+    gap: 18px;
+    right :0px;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+ /* inbox */
+
+ .headerinbox{
+    position:fixed;
+    top:57px;
+    left:250px;
+    height:20px;
+    width:655px;
+    
+ }
+ .Buttons{
+    padding: 10px 20px;
+      background-color: #a409ac;
+      color: white;
+      border: none;
+      height:125px;
+      border-radius: 0px;
+      
+}
+ .a , .b, .c, .d{
+    width: 150px;
+    height: 100px;
+    border-radius: 20px;
+    cursor:pointer;
+    
+ }
+ .addmore{
+    size: 50px;
+ }
+
+  
