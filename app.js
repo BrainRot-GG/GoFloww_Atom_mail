@@ -7,7 +7,8 @@ const model = googleAI.getGenerativeModel({
 const express=require('express')
 const app=express() 
 const path=require('path')
-const userModel=require("./user-model.js")   
+const userModel=require("./user-model.js") 
+const Email = require("./email-model.js");
 const mongoose=require('mongoose')
 mongoose.connect('mongodb://127.0.0.1:27017/myapp');
 const bcrypt=require('bcrypt')
@@ -18,6 +19,18 @@ app.use(cookieParser())
 app.use(express.urlencoded({extended:true}))
 app.use(express.static(path.join(__dirname,"public")))
 app.set("view engine","ejs")
+
+function requireAuth(req, res, next) {
+    const token = req.cookies.token;
+    if (!token) return res.redirect("/login");
+    try {
+        const decoded = jwt.verify(token, "store");
+        req.userEmail = decoded.email;
+        next();
+    } catch (err) {
+        return res.redirect("/login");
+    }
+}
 
 app.get("/",async(req,res)=>{
     res.render("sign-up")
@@ -73,4 +86,42 @@ app.get("/logout",async(req,res)=>{
     res.cookie("token","")
     res.redirect("/login")
 })
-app.listen(5000);
+const LOCAL_USER = "localuser@example.com";
+
+app.get("/compose", requireAuth, (req, res) => {
+    res.render("compose", { from: req.userEmail });
+});
+
+// Send Email (POST)
+app.post("/compose", requireAuth, async (req, res) => {
+    const { to, subject, body } = req.body;
+    await Email.create({
+        from: req.userEmail,
+        to,
+        subject,
+        body,
+        sentAt: new Date()
+    });
+    res.redirect("/inbox");
+});
+app.post("/send", async (req, res) => {
+    const { to, subject, body } = req.body;
+  
+    const email = new Email({
+      from: LOCAL_USER,
+      to,
+      subject,
+      body,
+      isDraft: false,
+      sentAt: new Date(),
+    });
+  
+    await email.save();
+    res.redirect("/inbox");
+  });
+app.get("/inbox", requireAuth, async (req, res) => {
+    const emails = await Email.find({ to: req.userEmail });
+    res.render("inbox", { emails });
+});
+
+app.listen(3000);

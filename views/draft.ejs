@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <% layout('layout') %>
+<h2>Drafts</h2>
+<table>
+  <tr><th>To</th><th>Subject</th><th>Actions</th></tr>
+  <% emails.forEach(email => { %>
+    <tr>
+      <td><%= email.to.map(user => user.name).join(', ') %></td>
+      <td><%= email.subject %></td>
+      <td><a href="/compose?draftId=<%= email._id %>">Edit</a></td>
+    </tr>
+  <% }) %>
+</table>
+</body>
+</html>

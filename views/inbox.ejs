@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inbox</title>
+</head>
+<body>
+  <h1>Inbox for localuser@example.com</h1>
+  <% if (emails.length === 0) { %>
+    <p>No emails yet.</p>
+  <% } else { %>
+    <% emails.forEach(email => { %>
+      <div style="border: 1px solid #ccc; padding: 10px; margin: 10px;">
+        <p><strong>From:</strong> <%= email.from %></p>
+        <p><strong>Subject:</strong> <%= email.subject %></p>
+        <p><strong>Message:</strong> <%= email.body %></p>
+        <p><small>Sent At: <%= email.sentAt.toLocaleString() %></small></p>
+      </div>
+    <% }) %>
+  <% } %>
+  <br>
+  <a href="/compose">Compose Email</a>
+</body>
+</html>

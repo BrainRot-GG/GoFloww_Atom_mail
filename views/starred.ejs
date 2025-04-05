@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <% layout('layout') %>
+    <h2>Starred Emails</h2>
+    <table>
+      <tr><th>From</th><th>Subject</th><th>Time</th></tr>
+      <% emails.forEach(email => { %>
+        <tr>
+          <td><%= email.from.name %></td>
+          <td><%= email.subject %></td>
+          <td><%= email.sentAt %></td>
+        </tr>
+      <% }) %>
+    </table>
+</body>
+</html>
