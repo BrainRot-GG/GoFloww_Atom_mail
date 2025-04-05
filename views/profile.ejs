@@ -297,16 +297,15 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         padding: 15px;
-        
     }
     
-    .header {
+    .email-box .header{
         font-weight: bold;
         border-bottom: 1px solid #ddd;
         padding-bottom: 10px;
     }
     
-    .input-field {
+    .email-box input {
         width: 100%;
         border: none;
         padding: 8px;
@@ -339,7 +338,7 @@
         border-top: 1px solid #ddd;
     }
     
-    .send-button {
+    .footer .s-button {
         background-color: #8d00a3;
         color: white;
         border: none;
@@ -456,32 +455,27 @@
 <!-- compose -->
 <div class="email-box">
   <div class="header">New Message</div>
-
-  <div class="from-field">
-    <input type="text" class="input-field" placeholder="From: ">
-  </div>
-
-  <div class="to-field">
-      <input type="text" class="input-field" placeholder="To: ">
-  </div>
-
-  <div class="subject-field">
-      <input type="text" class="input-field" placeholder="Subject: ">
-  </div>
-  <form action="/generate-email" method="post">
+  <form action="/send" method="POST">
+    <input type="text" name="to" placeholder="Recipient email" required />
+    <input type="text" name="subject" placeholder="Subject" />
+    <textarea name="body" class="message-box" placeholder="Write your email here..."></textarea>
+    <div class="footer">
+        <button class="submit-button">Send</button>
+        <div class="icons">
+          <i class="fa-solid fa-file"></i>
+          <i class="fa-solid fa-link"></i>
+          <i class="fa-solid fa-image"></i>
+        </div>
+        <div class="trash">
+          <i class="fa-solid fa-trash"></i>
+        </div>
+    </div>   
+  </form>
+  <!-- <form action="/generate-email" method="post">
   <input class="message-box" id="myTextarea" name="prompt" placeholder="Write your message...">
-</form>
+</form> -->
 
-  <div class="footer">
-      <button class="send-button">Send</button>
-      <div class="icons">
-        <i class="fa-solid fa-file"></i>
-        <i class="fa-solid fa-link"></i>
-        <i class="fa-solid fa-image"></i>
-      </div>
-      <div class="trash">
-        <i class="fa-solid fa-trash"></i>
-      </div>
+  
       <div class="chatbot" onclick="toggleButtons()">
         <i class="fa-solid fa-robot chatbot"></i>
       </div>

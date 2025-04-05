@@ -9,5 +9,4 @@ const emailSchema = new Schema({
     isDraft: { type: Boolean, default: false },
     sentAt: Date
 });
-
 module.exports = mongoose.model("Email", emailSchema);

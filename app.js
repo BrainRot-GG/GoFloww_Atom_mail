@@ -89,7 +89,7 @@ app.get("/logout",async(req,res)=>{
     res.cookie("token","")
     res.redirect("/login")
 })
-const LOCAL_USER = "localuser@example.com";
+const LOCAL_USER = "hello@example.com";
 
 app.get("/compose", requireAuth, (req, res) => {
     res.render("compose", { from: LOCAL_USER });
@@ -117,10 +117,9 @@ app.post('/send', requireAuth, async (req, res) => {
         if (!fromUser || !toUser) {
             return res.status(400).send("One or both users not found.");
         }
-
         const email = new Email({
             from: fromUser._id,
-            to: [toUser._id],
+            to: toUser._id,
             subject,
             body,
             isDraft: false,
